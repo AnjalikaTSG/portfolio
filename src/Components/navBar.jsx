@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavLink from '../Components/navBar/navLink';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { FaSun, FaMoon } from 'react-icons/fa'; // Import theme icons
 
 const navLink = [
     { title: 'Home', path: '/' },
@@ -13,111 +14,153 @@ const navLink = [
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        return localStorage.getItem('theme') === 'dark'; // Persist theme preference
+    });
 
     const toggleMenu = () => {
         setIsMenuOpen(prevState => !prevState);
     };
 
+    const toggleTheme = () => {
+        setIsDarkMode(prevState => !prevState);
+    };
+
+    useEffect(() => {
+        const theme = isDarkMode ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [isDarkMode]);
+
     return (
         <nav>
             <style>
                 {`
+                    :root {
+                        --background-color-light: #f0f0f0;
+                        --text-color-light: #000;
+                        --background-color-dark: #03011a;
+                        --text-color-dark: #fff;
+                    }
+
+                    [data-theme="light"] {
+                        --background-color: var(--background-color-light);
+                        --text-color: var(--text-color-light);
+                    }
+
+                    [data-theme="dark"] {
+                        --background-color: var(--background-color-dark);
+                        --text-color: var(--text-color-dark);
+                    }
+
+                    body {
+                        background-color: var(--background-color);
+                        color: var(--text-color);
+                    }
+
                     nav {
-                        background-color: #050321; /* Dark background */
-                        padding: 16px; /* Padding around nav */
-                        position: relative; /* Position for internal elements */
+                        background-color: var(--background-color);
+                        color: var(--text-color);
+                        padding: 16px;
+                        position: relative;
                     }
 
                     .container {
                         display: flex;
-                        justify-content: space-between; /* Space between logo and menu icon */
-                        align-items: center; /* Center items vertically */
-                        max-width: 1200px; /* Maximum width of the container */
-                        margin: 0 auto; /* Center container horizontally */
+                        justify-content: space-between;
+                        align-items: center;
+                        max-width: 1200px;
+                        margin: 0 auto;
                     }
 
                     .logo {
-                        font-size: 2rem; /* Font size for logo */
-                        font-weight: bold; /* Bold text */
-                        color: #fff; /* White text color */
-                        text-decoration: none; /* Remove underline */
+                        font-size: 2rem;
+                        font-weight: bold;
+                        color: var(--text-color);
+                        text-decoration: none;
                     }
 
                     .logo:hover {
-                        color: #DD9BCF; /* Color on hover */
+                        color: #DD9BCF;
                     }
 
                     .menu {
-                        display: ${isMenuOpen ? 'block' : 'flex'}; /* Toggle menu display */
-                        gap: 20px; /* Space between menu items */
+                        display: ${isMenuOpen ? 'block' : 'flex'};
+                        gap: 20px;
                     }
 
                     .menu ul {
-                        list-style: none; /* Remove bullet points */
-                        padding: 0; /* Remove padding */
-                        margin: 0; /* Remove margin */
-                        display: ${isMenuOpen ? 'block' : 'flex'}; /* Horizontal layout on desktop, block on mobile */
-                        gap: 20px; /* Space between list items */
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        display: ${isMenuOpen ? 'block' : 'flex'};
+                        gap: 20px;
                     }
 
                     .menuItem {
-                        display: block; /* Block display for menu items */
-                        padding: 8px 16px; /* Padding for menu items */
-                        font-size: 1.5rem; /* Font size for menu items */
-                        color: #fff; /* White text color */
-                        text-decoration: none; /* Remove underline */
-                        border-radius: 4px; /* Rounded corners */
-                        transition: background-color 0.3s; /* Smooth transition */
+                        display: block;
+                        padding: 8px 16px;
+                        font-size: 1.5rem;
+                        color: var(--text-color);
+                        text-decoration: none;
+                        border-radius: 4px;
+                        transition: background-color 0.3s, color 0.3s;
                     }
 
                     .menuItem:hover {
-                        background-color: #DD9BCF; /* Background color on hover */
-                        color: #000; /* Dark text color on hover */
+                        background-color: #DD9BCF;
+                        color: #000;
                     }
 
                     .menuIcon {
-                        display: none; /* Hide menu icon by default */
-                        font-size: 2rem; /* Size of menu icon */
-                        color: #fff; /* Color of menu icon */
-                        cursor: pointer; /* Pointer cursor */
+                        display: none;
+                        font-size: 2rem;
+                        color: var(--text-color);
+                        cursor: pointer;
                     }
 
                     .closeIcon {
-                        display: none; /* Hide close icon by default */
-                        font-size: 2rem; /* Size of close icon */
-                        color: #fff; /* Color of close icon */
-                        cursor: pointer; /* Pointer cursor */
-                        position: absolute; /* Positioning within menu */
-                        top: 16px; /* Distance from top */
-                        right: 16px; /* Distance from right */
+                        display: none;
+                        font-size: 2rem;
+                        color: var(--text-color);
+                        cursor: pointer;
+                        position: absolute;
+                        top: 16px;
+                        right: 16px;
                     }
 
-                    /* Responsive Design */
+                    .themeIcon {
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        margin-left: 20px;
+                        color: var(--text-color);
+                    }
+
                     @media (max-width: 768px) {
                         .menu {
-                            display: ${isMenuOpen ? 'block' : 'none'}; /* Toggle menu display */
-                            position: absolute; /* Absolute positioning */
-                            top: 0; /* Align to top */
-                            left: 0; /* Align to left */
-                            background-color: #000; /* Background color */
-                            height: 100vh; /* Full viewport height */
-                            width: 250px; /* Width of mobile menu */
-                            padding-top: 60px; /* Padding for menu items */
-                            padding-right: 16px; /* Padding for close icon */
-                            z-index: 10; /* Ensure menu appears on top */
-                            box-sizing: border-box; /* Include padding in width */
+                            display: ${isMenuOpen ? 'block' : 'none'};
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            background-color: var(--background-color);
+                            height: 100vh;
+                            width: 250px;
+                            padding-top: 60px;
+                            padding-right: 16px;
+                            z-index: 10;
+                            box-sizing: border-box;
                         }
 
                         .menu ul {
-                            display: block; /* Block display for mobile menu */
+                            display: block;
                         }
 
                         .menuIcon {
-                            display: block; /* Show menu icon on mobile */
+                            display: block;
                         }
 
                         .closeIcon {
-                            display: ${isMenuOpen ? 'block' : 'none'}; /* Toggle close icon */
+                            display: ${isMenuOpen ? 'block' : 'none'};
                         }
                     }
                 `}
@@ -140,6 +183,9 @@ const NavBar = () => {
                             </li>
                         ))}
                     </ul>
+                </div>
+                <div className="themeIcon" onClick={toggleTheme} aria-label="Toggle theme">
+                    {isDarkMode ? <FaSun /> : <FaMoon />}
                 </div>
             </div>
         </nav>

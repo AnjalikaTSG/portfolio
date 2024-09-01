@@ -138,11 +138,29 @@ const About = () => {
             <style jsx>{`
                 @import url('https://fonts.googleapis.com/css2?family=Didot:wght@400;700&display=swap');
 
+                :root {
+                    --background-color-light: #f0f0f0;
+                    --text-color-light: #000;
+                    --background-color-dark: #03011a;
+                    --text-color-dark: #fff;
+                }
+
+                [data-theme="light"] {
+                    --background-color: var(--background-color-light);
+                    --text-color: var(--text-color-light);
+                }
+
+                [data-theme="dark"] {
+                    --background-color: var(--background-color-dark);
+                    --text-color: var(--text-color-dark);
+                }
+
                 .about-section {
-                    color: white;
+                    color: var(--text-color);
                     font-size: 15px;
                     margin: 30px;
                     font-family: 'Didot', serif;
+                    background-color: var(--background-color);
                 }
 
                 .content {
@@ -193,6 +211,21 @@ const About = () => {
 
                 .no-bullets li {
                     margin-bottom: 5px;
+                }
+
+                .tab-button {
+                    background: transparent;
+                    border: 1px solid var(--text-color);
+                    color: var(--text-color);
+                    padding: 8px 16px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: background-color 0.3s, color 0.3s;
+                }
+
+                .tab-button.active {
+                    background-color: var(--text-color);
+                    color: var(--background-color);
                 }
 
                 @media (min-width: 1200px) {

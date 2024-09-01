@@ -192,7 +192,7 @@ const Projects = () => {
         technologies: ['React Native', 'React', 'Node.js', 'MySQL']
       },
       photos: [software1, software2, software3, software4, software5, software6, software7, software8, software9, software10, software11, software12, software13, software14, software15, software16],
-      repoLink: 'https://github.com/user/project1',
+      repoLink: 'https://github.com/AnjalikaTSG/Porthfolio/tree/master',
     },
     {
       title: 'PORTABLE SECURITY BOX (LEVEL 1 HARDWARE PROJECT)',
