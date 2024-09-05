@@ -39,7 +39,7 @@ const NavBar = () => {
                     :root {
                         --background-color-light: #f0f0f0;
                         --text-color-light: #000;
-                        --background-color-dark: #03011a;
+                        --background-color-dark: #0a0826;
                         --text-color-dark: #fff;
                     }
 
@@ -63,6 +63,7 @@ const NavBar = () => {
                         color: var(--text-color);
                         padding: 16px;
                         position: relative;
+                        margin-left: 0; /* Remove left margin */
                     }
 
                     .container {
@@ -70,7 +71,8 @@ const NavBar = () => {
                         justify-content: space-between;
                         align-items: center;
                         max-width: 1200px;
-                        margin: 0 auto;
+                        margin: 0 auto; /* Center the container */
+                        padding-left: 0; /* Remove left padding */
                     }
 
                     .logo {
@@ -87,6 +89,7 @@ const NavBar = () => {
                     .menu {
                         display: ${isMenuOpen ? 'block' : 'flex'};
                         gap: 20px;
+                        margin-left: 0; /* Remove left margin */
                     }
 
                     .menu ul {
@@ -112,28 +115,17 @@ const NavBar = () => {
                         color: #000;
                     }
 
-                    .menuIcon {
-                        display: none;
+                    .menuIcon, .closeIcon {
                         font-size: 2rem;
                         color: var(--text-color);
                         cursor: pointer;
-                    }
-
-                    .closeIcon {
-                        display: none;
-                        font-size: 2rem;
-                        color: var(--text-color);
-                        cursor: pointer;
-                        position: absolute;
-                        top: 16px;
-                        right: 16px;
+                        display: none; /* Hide icons by default */
                     }
 
                     .themeIcon {
                         font-size: 1.5rem;
                         cursor: pointer;
-                        margin-left: 20px;
-                        color: var(--text-color);
+                        margin-left: 0; /* Remove left margin */
                     }
 
                     @media (max-width: 768px) {
@@ -156,11 +148,11 @@ const NavBar = () => {
                         }
 
                         .menuIcon {
-                            display: block;
+                            display: block; /* Show menu icon on small screens */
                         }
 
                         .closeIcon {
-                            display: ${isMenuOpen ? 'block' : 'none'};
+                            display: ${isMenuOpen ? 'block' : 'none'}; /* Show close icon when menu is open */
                         }
                     }
                 `}

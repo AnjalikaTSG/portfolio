@@ -23,7 +23,6 @@ import hardware2 from '../Images/Hardware2.jpg';
 import hardware3 from '../Images/Hardware3.jpg';
 import hardware4 from '../Images/Hardware4.jpg';
 
-
 // Inline styles
 const styles = {
   projectCard: {
@@ -79,11 +78,13 @@ const styles = {
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '16px',
+    color: 'black', // Updated text color to black
   },
   description: {
     fontSize: '18px',
     textAlign: 'center',
     marginBottom: '16px',
+    color: 'black', // Updated text color to black
   },
   projectLink: {
     display: 'inline-block',
@@ -103,10 +104,11 @@ const styles = {
     display: 'inline-block',  // Center the list itself
     textAlign: 'left',  // Align text within the list to the left
     paddingLeft: '20px',
+    color: 'black', // Updated text color to black
   },
   header:{
     color:'white',
-},
+  },
 };
 
 const Project = ({ project }) => {
@@ -132,51 +134,51 @@ const Project = ({ project }) => {
   return (
     <div>
       <h1 className="bold" style={styles.header}>Projects</h1>
-    <div style={styles.projectCard}>
-      <div style={styles.imageContainer} {...swipeHandlers}>
-        <div
-          style={{
-            ...styles.imageCarousel,
-            transform: `translateX(-${currentImageIndex * 300}px)`,
-          }}
-        >
-          {project.photos.map((photo, index) => (
-            <img
-              key={index}
-              src={photo}
-              alt={project.title}
-              style={styles.imageItem}
-            />
-          ))}
-        </div>
-        {project.photos.length > 1 && (
-          <>
-            <button onClick={handlePrevious} style={{ ...styles.navigationButton, ...styles.prevButton }}>
-              &#9664;
-            </button>
-            <button onClick={handleNext} style={{ ...styles.navigationButton, ...styles.nextButton }}>
-              &#9654;
-            </button>
-          </>
-        )}
-      </div>
-      <div style={styles.projectDetails}>
-        <h2 style={styles.projectTitle}>{project.title}</h2>
-        <h3 style={styles.description}>
-          {project.description.intro}
-        </h3>
-        <div style={styles.listContainer}>
-          <ul style={styles.list}>
-            {project.description.technologies.map((tech, index) => (
-              <li key={index}>{tech}</li>
+      <div style={styles.projectCard}>
+        <div style={styles.imageContainer} {...swipeHandlers}>
+          <div
+            style={{
+              ...styles.imageCarousel,
+              transform: `translateX(-${currentImageIndex * 300}px)`,
+            }}
+          >
+            {project.photos.map((photo, index) => (
+              <img
+                key={index}
+                src={photo}
+                alt={project.title}
+                style={styles.imageItem}
+              />
             ))}
-          </ul>
+          </div>
+          {project.photos.length > 1 && (
+            <>
+              <button onClick={handlePrevious} style={{ ...styles.navigationButton, ...styles.prevButton }}>
+                &#9664;
+              </button>
+              <button onClick={handleNext} style={{ ...styles.navigationButton, ...styles.nextButton }}>
+                &#9654;
+              </button>
+            </>
+          )}
         </div>
-        <a href={project.repoLink} target="_blank" rel="noopener noreferrer" style={styles.projectLink}>
-          View Repository
-        </a>
+        <div style={styles.projectDetails}>
+          <h2 style={styles.projectTitle}>{project.title}</h2>
+          <h3 style={styles.description}>
+            {project.description.intro}
+          </h3>
+          <div style={styles.listContainer}>
+            <ul style={styles.list}>
+              {project.description.technologies.map((tech, index) => (
+                <li key={index}>{tech}</li>
+              ))}
+            </ul>
+          </div>
+          <a href={project.repoLink} target="_blank" rel="noopener noreferrer" style={styles.projectLink}>
+            View Repository
+          </a>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
