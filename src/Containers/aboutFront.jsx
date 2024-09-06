@@ -121,6 +121,7 @@ const AboutFront = () => {
                                 key={tabData.id}
                                 selectTab={() => handleTabChange(tabData.id)}
                                 active={tab === tabData.id}
+                                className="tab-title" // Applying class for sans-serif font
                             >
                                 {tabData.title}
                             </TabButton>
@@ -138,7 +139,7 @@ const AboutFront = () => {
                     color: white;
                     font-size: 15px;
                     margin: 30px 0;
-                    font-family: 'Didot', serif; /* Apply Didot font */
+                    font-family: sans-serif;
                 }
 
                 .content {
@@ -168,6 +169,10 @@ const AboutFront = () => {
                     margin-bottom: 20px;
                 }
 
+                .category h3 {
+                    font-family: sans-serif;
+                }
+
                 .no-bullets {
                     list-style-type: none;
                     padding-left: 0;
@@ -175,6 +180,11 @@ const AboutFront = () => {
 
                 .no-bullets li {
                     margin-bottom: 5px;
+                }
+
+                .tab-title {
+                    font-family: sans-serif; /* Apply sans-serif to tab titles */
+                    font-weight: bold;
                 }
 
                 @media (min-width: 1200px) {

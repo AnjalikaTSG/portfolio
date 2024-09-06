@@ -131,7 +131,9 @@ const About = () => {
                         ))}
                     </div>
                     <br />
-                    {tab && <div className='data'>{TAB_DATA.find((t) => t.id === tab).content}</div>}
+                    <div className={`data ${tab ? "fade-in" : "fade-out"}`}>
+                        {tab && TAB_DATA.find((t) => t.id === tab).content}
+                    </div>
                     {isPending && <p>Loading...</p>}
                 </div>
             </div>
@@ -159,7 +161,7 @@ const About = () => {
                     color: var(--text-color);
                     font-size: 15px;
                     margin: 30px;
-                    font-family: 'Didot', serif;
+                    font-family: sans-serif;
                     background-color: var(--background-color);
                 }
 
@@ -226,6 +228,25 @@ const About = () => {
                 .tab-button.active {
                     background-color: var(--text-color);
                     color: var(--background-color);
+                }
+
+                .fade-in {
+                    animation: fadeIn 0.5s ease-in forwards;
+                }
+
+                .fade-out {
+                    opacity: 0;
+                    animation: fadeOut 0.5s ease-out forwards;
+                }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
                 }
 
                 @media (min-width: 1200px) {

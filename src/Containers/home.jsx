@@ -13,7 +13,7 @@ const Home = () => {
           {`
             .pageContainer {
               margin: 30px;
-              font-family: 'Didot', serif;
+              font-family: sans-serif;
               position: relative;
             }
 
@@ -82,7 +82,7 @@ const Home = () => {
 
             .hireBut,
             .downloadBut {
-              background: linear-gradient(to right, #C6FAD2, #DD9BCF);
+              background: #484848;
               color: #000000;
               border: 1px solid transparent;
               padding: 12px 24px;

@@ -6,9 +6,9 @@ const TabButton = ({ active, selectTab, children }) => {
         border: 'none',
         padding: '0',
         cursor: 'pointer',
-        color: active ? '#EC4899' : '#C6FAD2',
+        color: active ? '#484848' : '#808080',
         borderBottom: active ? '2px solid #EC4899' : 'none',
-        fontFamily: 'Didot, serif', // Apply Didot font here
+        fontFamily: 'sans-serif', // Corrected font-family syntax
     };
 
     return (

@@ -30,17 +30,19 @@ const styles = {
     borderRadius: '12px',
     overflow: 'hidden',
     boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
-    background: '#C6FAD2',
+    background: '#484848',
     textAlign: 'center',
     maxWidth: '850px',
     margin: '0 auto',
     padding: '16px',
+    animation: 'slideIn 1s ease-out',
+    transition: 'transform 0.5s ease-in-out',
   },
   imageContainer: {
     position: 'relative',
     overflow: 'hidden',
-    width: '300px', 
-    height: '600px', 
+    width: '300px',
+    height: '600px',
     margin: '0 auto',
   },
   imageCarousel: {
@@ -48,10 +50,11 @@ const styles = {
     transition: 'transform 0.5s ease',
   },
   imageItem: {
-    width: '300px', 
-    height: '600px', 
-    objectFit: 'cover', 
+    width: '300px',
+    height: '600px',
+    objectFit: 'cover',
     flexShrink: 0,
+    animation: 'fadeIn 1s ease-out',
   },
   navigationButton: {
     background: '#DD9BCF',
@@ -64,6 +67,8 @@ const styles = {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
+    transition: 'background-color 0.3s, transform 0.3s',
+    zIndex: 1,
   },
   prevButton: {
     left: '5px',
@@ -73,18 +78,20 @@ const styles = {
   },
   projectDetails: {
     marginTop: '20px',
+    animation: 'fadeIn 1s ease-out',
   },
   projectTitle: {
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '16px',
-    color: 'black', // Updated text color to black
+    color: '#EC4899',
+    transition: 'color 0.3s',
   },
   description: {
     fontSize: '18px',
     textAlign: 'center',
     marginBottom: '16px',
-    color: 'black', // Updated text color to black
+    color: '#fff',
   },
   projectLink: {
     display: 'inline-block',
@@ -94,23 +101,60 @@ const styles = {
     textDecoration: 'none',
     borderRadius: '8px',
     marginTop: '16px',
+    transition: 'background-color 0.3s, transform 0.3s',
   },
   listContainer: {
-    textAlign: 'center',  // Center the list container
+    textAlign: 'center',
     marginBottom: '18px',
   },
   list: {
     listStyleType: 'disc',
-    display: 'inline-block',  // Center the list itself
-    textAlign: 'left',  // Align text within the list to the left
+    display: 'inline-block',
+    textAlign: 'left',
     paddingLeft: '20px',
-    color: 'black', // Updated text color to black
+    color: '#fff',
   },
-  header:{
-    color:'white',
+  header: {
+    color: '#EC4899',
+    textAlign: 'center',
+    marginBottom: '20px',
+    animation: 'fadeIn 1s ease-out',
   },
 };
 
+// Keyframe animations
+const animationStyles = `
+  @keyframes slideIn {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+// Insert animation styles into the document
+const insertAnimationStyles = () => {
+  const styleTag = document.createElement('style');
+  styleTag.innerHTML = animationStyles;
+  document.head.appendChild(styleTag);
+};
+
+insertAnimationStyles();
+
+// Project component
 const Project = ({ project }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -153,10 +197,16 @@ const Project = ({ project }) => {
           </div>
           {project.photos.length > 1 && (
             <>
-              <button onClick={handlePrevious} style={{ ...styles.navigationButton, ...styles.prevButton }}>
+              <button
+                onClick={handlePrevious}
+                style={{ ...styles.navigationButton, ...styles.prevButton }}
+              >
                 &#9664;
               </button>
-              <button onClick={handleNext} style={{ ...styles.navigationButton, ...styles.nextButton }}>
+              <button
+                onClick={handleNext}
+                style={{ ...styles.navigationButton, ...styles.nextButton }}
+              >
                 &#9654;
               </button>
             </>
@@ -174,7 +224,12 @@ const Project = ({ project }) => {
               ))}
             </ul>
           </div>
-          <a href={project.repoLink} target="_blank" rel="noopener noreferrer" style={styles.projectLink}>
+          <a
+            href={project.repoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.projectLink}
+          >
             View Repository
           </a>
         </div>
@@ -183,6 +238,7 @@ const Project = ({ project }) => {
   );
 };
 
+// Projects component
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -190,7 +246,7 @@ const Projects = () => {
     {
       title: 'PART TIME JOB OFFERING PLATFORM (LEVEL 2 SOFTWARE PROJECT)',
       description: {
-        intro: 'This platform is developed to the part-time job seekers and job posters. It includes mobile application and web application. In this project, I have done the functionalities of the job poster. Technologies used:',
+        intro: 'This platform is developed for part-time job seekers and job posters. It includes a mobile application and a web application. In this project, I have implemented the functionalities of the job poster. Technologies used:',
         technologies: ['React Native', 'React', 'Node.js', 'MySQL']
       },
       photos: [software1, software2, software3, software4, software5, software6, software7, software8, software9, software10, software11, software12, software13, software14, software15, software16],
@@ -199,7 +255,7 @@ const Projects = () => {
     {
       title: 'PORTABLE SECURITY BOX (LEVEL 1 HARDWARE PROJECT)',
       description: {
-        intro: 'This project was specifically to create a secure, portable storage solution for valuable things. This system consisted of object detection, fingerprint verification, PIN authentication, location tracking, detect motion, and activate buzzer. In this project, I was responsible for creating the fingerprint authentication process.',
+        intro: 'This project was created to develop a secure, portable storage solution for valuable items. The system includes object detection, fingerprint verification, PIN authentication, location tracking, motion detection, and an alarm system. In this project, I was responsible for the fingerprint authentication process.',
         technologies: ['Object Detection', 'Fingerprint Verification', 'PIN Authentication', 'Location Tracking']
       },
       photos: [hardware1, hardware2, hardware3, hardware4],
@@ -208,20 +264,30 @@ const Projects = () => {
   ];
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : projects.length - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : projects.length - 1
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex < projects.length - 1 ? prevIndex + 1 : 0));
+    setCurrentIndex((prevIndex) =>
+      prevIndex < projects.length - 1 ? prevIndex + 1 : 0
+    );
   };
 
   return (
     <div>
-      <button onClick={handlePrevious} style={{ ...styles.navigationButton, ...styles.prevButton }}>
+      <button
+        onClick={handlePrevious}
+        style={{ ...styles.navigationButton, ...styles.prevButton }}
+      >
         &#9664;
       </button>
       <Project project={projects[currentIndex]} />
-      <button onClick={handleNext} style={{ ...styles.navigationButton, ...styles.nextButton }}>
+      <button
+        onClick={handleNext}
+        style={{ ...styles.navigationButton, ...styles.nextButton }}
+      >
         &#9654;
       </button>
     </div>

@@ -3,7 +3,7 @@
 body {
   margin: 20px;
   padding: 0;
-  font-family: 'Didot', serif;
+  font-family: 'Didot', arial;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
