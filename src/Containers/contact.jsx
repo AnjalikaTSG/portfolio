@@ -7,30 +7,25 @@ const Contact = () => {
             <h1 className="header">Contact Me</h1>
             <div className="card-container">
                 <div className="card">
-                    <h2 className="title">Contact Me</h2>
                     <p><FaPhoneAlt className="icon" /> +94-758178490</p>
                 </div>
                 <div className="card">
-                    <h2 className="title">Email</h2>
                     <p><FaEnvelope className="icon" /> gihanianjalika08@gmail.com</p>
                 </div>
                 <div className="card">
-                    <h2 className="title">Location</h2>
                     <p><FaMapMarkerAlt className="icon" /> Dehiowita, Sri Lanka</p>
                 </div>
                 <div className="card">
-                    <h2 className="title">GitHub</h2>
                     <p>
                         <a href="https://github.com/AnjalikaTSG" target="_blank" rel="noopener noreferrer" className="link">
-                            <FaGithub className="icon" /> GitHub Profile
+                            <FaGithub className="icon" />
                         </a>
                     </p>
                 </div>
                 <div className="card">
-                    <h2 className="title">LinkedIn</h2>
                     <p>
                         <a href="https://www.linkedin.com/in/gihani-anjalika-90a6882a6/" target="_blank" rel="noopener noreferrer" className="link">
-                            <FaLinkedin className="icon" /> LinkedIn Profile
+                            <FaLinkedin className="icon" />
                         </a>
                     </p>
                 </div>
@@ -42,7 +37,6 @@ const Contact = () => {
                     color: white;
                     font-family: 'Roboto', sans-serif;
                     padding: 20px;
-                    background-color: #1a1a1a;
                 }
 
                 .header {
@@ -54,20 +48,19 @@ const Contact = () => {
                 }
 
                 .card-container {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    display: flex;
+                    flex-direction: column;
                     gap: 20px;
-                    justify-content: center;
+                    align-items: center;
                     animation: fadeIn 1s ease-in-out;
                 }
 
                 .card {
-                    border: 3px solid #DD9BCF;
-                    border-radius: 8px;
+                    width: 100%;
+                    max-width: 500px;
                     padding: 20px;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                     text-align: center;
-                    background-color: #484848;
                     color: #fff;
                     transition: transform 0.3s, box-shadow 0.3s;
                 }
@@ -77,21 +70,15 @@ const Contact = () => {
                     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
                 }
 
-                .title {
-                    margin-bottom: 10px;
-                    color: #EC4899;
-                    font-size: 2rem;
-                }
-
                 .icon {
                     margin-right: 10px;
-                    color: #EC4899;
+                    color: #fff;
                     font-size: 1.5rem;
                 }
 
                 .link {
                     text-decoration: none;
-                    color: #EC4899;
+                    color: #fff;
                     display: flex;
                     align-items: center;
                     justify-content: center;

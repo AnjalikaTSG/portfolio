@@ -26,8 +26,8 @@ import hardware4 from '../Images/Hardware4.jpg';
 // Inline styles
 const styles = {
   projectCard: {
-    border: '3px solid #DD9BCF',
-    borderRadius: '12px',
+    border: '3px solid #383838',
+    borderRadius: '7px',
     overflow: 'hidden',
     boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
     background: '#484848',
@@ -57,16 +57,16 @@ const styles = {
     animation: 'fadeIn 1s ease-out',
   },
   navigationButton: {
-    background: '#DD9BCF',
+    background: '#383838',
     border: 'none',
     color: '#fff',
     padding: '12px',
-    fontSize: '24px',
+    fontSize: '15px',
     borderRadius: '50%',
     cursor: 'pointer',
     position: 'absolute',
     top: '50%',
-    transform: 'translateY(-50%)',
+    transform: 'translateY(-10%)',
     transition: 'background-color 0.3s, transform 0.3s',
     zIndex: 1,
   },
@@ -84,7 +84,7 @@ const styles = {
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '16px',
-    color: '#EC4899',
+    color: '#fff',
     transition: 'color 0.3s',
   },
   description: {
@@ -95,8 +95,8 @@ const styles = {
   },
   projectLink: {
     display: 'inline-block',
-    background: '#EC4899',
-    color: '#92C69A',
+    background: '#383838',
+    color: '#fff',
     padding: '10px 20px',
     textDecoration: 'none',
     borderRadius: '8px',

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import NavLink from '../Components/navBar/navLink';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FaSun, FaMoon } from 'react-icons/fa'; // Import theme icons
 
 const navLink = [
-    { title: 'Home', path: '/' },
-    { title: 'About', path: '/about' },
-    { title: 'Contact', path: '/contact' },
-    { title: 'Projects', path: '/projects' },
-    { title: 'Skills', path: '/skills' }
+    { title: 'Home', path: '#home' },
+    { title: 'About', path: '#about' },
+    { title: 'Contact', path: '#contact' },
+    { title: 'Projects', path: '#projects' },
+    { title: 'Skills', path: '#skills' }
 ];
 
 const NavBar = () => {
@@ -31,6 +29,14 @@ const NavBar = () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
     }, [isDarkMode]);
+
+    const handleScrollToSection = (path) => {
+        const element = document.querySelector(path);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+        setIsMenuOpen(false); // Close the menu after clicking
+    };
 
     return (
         <nav>
@@ -63,7 +69,6 @@ const NavBar = () => {
                         color: var(--text-color);
                         padding: 16px;
                         position: relative;
-                        margin-left: 0; /* Remove left margin */
                     }
 
                     .container {
@@ -71,8 +76,7 @@ const NavBar = () => {
                         justify-content: space-between;
                         align-items: center;
                         max-width: 1200px;
-                        margin: 0 auto; /* Center the container */
-                        padding-left: 0; /* Remove left padding */
+                        margin: 0 auto;
                     }
 
                     .logo {
@@ -89,7 +93,6 @@ const NavBar = () => {
                     .menu {
                         display: ${isMenuOpen ? 'block' : 'flex'};
                         gap: 20px;
-                        margin-left: 0; /* Remove left margin */
                     }
 
                     .menu ul {
@@ -108,6 +111,7 @@ const NavBar = () => {
                         text-decoration: none;
                         border-radius: 4px;
                         transition: background-color 0.3s, color 0.3s;
+                        cursor: pointer;
                     }
 
                     .menuItem:hover {
@@ -119,13 +123,12 @@ const NavBar = () => {
                         font-size: 2rem;
                         color: var(--text-color);
                         cursor: pointer;
-                        display: none; /* Hide icons by default */
+                        display: none;
                     }
 
                     .themeIcon {
                         font-size: 1.5rem;
                         cursor: pointer;
-                        margin-left: 0; /* Remove left margin */
                     }
 
                     @media (max-width: 768px) {
@@ -148,35 +151,35 @@ const NavBar = () => {
                         }
 
                         .menuIcon {
-                            display: block; /* Show menu icon on small screens */
+                            display: block;
                         }
 
                         .closeIcon {
-                            display: ${isMenuOpen ? 'block' : 'none'}; /* Show close icon when menu is open */
+                            display: ${isMenuOpen ? 'block' : 'none'};
                         }
                     }
                 `}
             </style>
             <div className="container">
-                <Link to="/" className="logo" aria-label="Home">
+                <div className="logo">
                     Gihani Anjalika
-                </Link>
-                <div className="menuIcon" onClick={toggleMenu} aria-label="Open menu">
+                </div>
+                <div className="menuIcon" onClick={toggleMenu}>
                     <HiMenu />
                 </div>
                 <div className="menu">
-                    <div className="closeIcon" onClick={toggleMenu} aria-label="Close menu">
+                    <div className="closeIcon" onClick={toggleMenu}>
                         <HiX />
                     </div>
                     <ul>
                         {navLink.map((link, index) => (
-                            <li key={index}>
-                                <NavLink href={link.path} title={link.title} />
+                            <li key={index} onClick={() => handleScrollToSection(link.path)}>
+                                <span className="menuItem">{link.title}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
-                <div className="themeIcon" onClick={toggleTheme} aria-label="Toggle theme">
+                <div className="themeIcon" onClick={toggleTheme}>
                     {isDarkMode ? <FaSun /> : <FaMoon />}
                 </div>
             </div>

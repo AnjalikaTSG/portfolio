@@ -1,6 +1,7 @@
 "use client";
 import React, { useTransition, useState } from 'react';
 import TabButton from './TabButton';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const TAB_DATA = [
     {
@@ -108,30 +109,34 @@ const AboutFront = () => {
                 <div className="description">
                     <h2 className="bold">About Me</h2>
                     <p>
-                        An IT undergraduate student committed to enhancing technical
-                        knowledge and problem-solving skills. A proactive team player with
-                        leadership abilities and a strong sense of teamwork. Through
-                        projects, I have improved my ability to adjust to new
-                        technologies. I am seeking a software engineering internship to
-                        further develop my skills and gain industry experience.
+                        I am an enthusiastic IT undergraduate currently pursuing a degree in Information Technology & Management at the University of Moratuwa. With a deep-seated passion for technology and a commitment to continuous learning, I am dedicated to expanding my technical knowledge and sharpening my problem-solving skills. My journey through academia and various projects has equipped me with a robust understanding of software development, system analysis, and the latest technological advancements.
+                        As a proactive team player, I excel in collaborative settings and am known for my leadership abilities. I thrive in environments where creativity and innovation are encouraged, and I take pride in motivating and guiding my peers to achieve collective goals. My hands-on experience with diverse projects has not only honed my technical skills but also enhanced my adaptability to rapidly changing technologies and industry trends.
                     </p>
-                    <div className='subsection'>
-                        {TAB_DATA.map(tabData => (
-                            <TabButton
-                                key={tabData.id}
-                                selectTab={() => handleTabChange(tabData.id)}
-                                active={tab === tabData.id}
-                                className="tab-title" // Applying class for sans-serif font
-                            >
-                                {tabData.title}
-                            </TabButton>
-                        ))}
-                    </div>
-                    <br />
-                    {tab && <div className='data'>{TAB_DATA.find(t => t.id === tab).content}</div>}
-                    {isPending && <p>Loading...</p>}
+                </div>
+                <div className="contact-icons">
+                    <a href="https://github.com/AnjalikaTSG" target="_blank" rel="noopener noreferrer" className="link">
+                        <FaGithub className="icon" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/gihani-anjalika-90a6882a6/" target="_blank" rel="noopener noreferrer" className="link">
+                        <FaLinkedin className="icon" />
+                    </a>
                 </div>
             </div>
+            <div className='subsection'>
+                {TAB_DATA.map(tabData => (
+                    <TabButton
+                        key={tabData.id}
+                        selectTab={() => handleTabChange(tabData.id)}
+                        active={tab === tabData.id}
+                        className="tab-title"
+                    >
+                        {tabData.title}
+                    </TabButton>
+                ))}
+            </div>
+            <br />
+            {tab && <div className='data'>{TAB_DATA.find(t => t.id === tab).content}</div>}
+            {isPending && <p>Loading...</p>}
             <style jsx>{`
                 @import url('https://fonts.googleapis.com/css2?family=Didot:wght@400;700&display=swap');
 
@@ -156,6 +161,32 @@ const AboutFront = () => {
                 .description h2.bold {
                     font-weight: bold;
                     margin-bottom: 10px;
+                }
+
+                .contact-icons {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+                }
+
+                .contact-icons .link {
+                    text-decoration: none;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 2rem;
+                    transition: color 0.3s;
+                }
+
+                .contact-icons .link:hover {
+                    color: #EC4899;
+                }
+
+                .icon {
+                    font-size: 2rem;
+                    margin-right: 10px;
                 }
 
                 .subsection {
