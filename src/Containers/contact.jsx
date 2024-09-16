@@ -1,33 +1,60 @@
-import React from 'react';
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const Contact = () => {
+    const [form, setForm] = useState({ name: '', email: '', message: '' });
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic here
+    };
+
     return (
         <div className="contact-container">
             <h1 className="header">Contact Me</h1>
-            <div className="card-container">
-                <div className="card">
-                    <p><FaPhoneAlt className="icon" /> +94-758178490</p>
+            <div className="info-form-container">
+                <div className="info-container">
+                    <div className="card">
+                        <p><FaPhoneAlt className="icon" /> +94-758178490</p>
+                    </div>
+                    <div className="card">
+                        <p><FaEnvelope className="icon" /> gihanianjalika08@gmail.com</p>
+                    </div>
+                    <div className="card">
+                        <p><FaMapMarkerAlt className="icon" /> Dehiowita, Sri Lanka</p>
+                    </div>
                 </div>
-                <div className="card">
-                    <p><FaEnvelope className="icon" /> gihanianjalika08@gmail.com</p>
-                </div>
-                <div className="card">
-                    <p><FaMapMarkerAlt className="icon" /> Dehiowita, Sri Lanka</p>
-                </div>
-                <div className="card">
-                    <p>
-                        <a href="https://github.com/AnjalikaTSG" target="_blank" rel="noopener noreferrer" className="link">
-                            <FaGithub className="icon" />
-                        </a>
-                    </p>
-                </div>
-                <div className="card">
-                    <p>
-                        <a href="https://www.linkedin.com/in/gihani-anjalika-90a6882a6/" target="_blank" rel="noopener noreferrer" className="link">
-                            <FaLinkedin className="icon" />
-                        </a>
-                    </p>
+                <div className="form-container">
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Your Name"
+                            value={form.name}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Your Email"
+                            value={form.email}
+                            onChange={handleChange}
+                            required
+                        />
+                        <textarea
+                            name="message"
+                            placeholder="Your Message"
+                            value={form.message}
+                            onChange={handleChange}
+                            required
+                        />
+                        <button type="submit">Send Message</button>
+                    </form>
                 </div>
             </div>
             <style jsx>{`
@@ -37,22 +64,33 @@ const Contact = () => {
                     color: white;
                     font-family: 'Roboto', sans-serif;
                     padding: 20px;
+                    animation: slideIn 1s ease-out;
                 }
 
                 .header {
-                    text-align: center;
+                    text-align: left;
                     margin-bottom: 40px;
-                    color: #EC4899;
+                    color: #ffffff;
                     font-size: 2.5rem;
                     animation: fadeIn 1s ease-in-out;
                 }
 
-                .card-container {
+                .info-form-container {
                     display: flex;
                     flex-direction: column;
                     gap: 20px;
-                    align-items: center;
-                    animation: fadeIn 1s ease-in-out;
+                }
+
+                .info-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                .form-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
                 }
 
                 .card {
@@ -76,18 +114,54 @@ const Contact = () => {
                     font-size: 1.5rem;
                 }
 
-                .link {
-                    text-decoration: none;
-                    color: #fff;
+                .form-container form {
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.3rem;
-                    transition: color 0.3s;
+                    flex-direction: column;
+                    gap: 10px;
                 }
 
-                .link:hover {
-                    color: #fff;
+                .form-container input,
+                .form-container textarea {
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 16px;
+                    color: #333;
+                }
+
+                .form-container button {
+                    padding: 10px;
+                    background-color:#00BFFF;
+                    border: none;
+                    border-radius: 4px;
+                    color: white;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+
+                .form-container button:hover {
+                    background-color: #0077b6;
+                }
+
+                @media (min-width: 768px) {
+                    .info-form-container {
+                        flex-direction: row;
+                        align-items: flex-start;
+                    }
+
+                    .info-container,
+                    .form-container {
+                        flex: 1;
+                    }
+
+                    .info-container {
+                        margin-right: 20px;
+                    }
+
+                    .form-container {
+                        max-width: 500px;
+                    }
                 }
 
                 @keyframes fadeIn {
@@ -98,6 +172,17 @@ const Contact = () => {
                     to {
                         opacity: 1;
                         transform: translateY(0);
+                    }
+                }
+
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
                     }
                 }
             `}</style>

@@ -12,7 +12,21 @@ const PageContainer = styled.div`
   margin: 30px;
   font-family: sans-serif;
   position: relative;
+  animation: showRight 1s ease forwards;
+  animation-delay: 1.6s;
+
+  @keyframes showRight {
+    from {
+      opacity: 0;
+      transform: translateX(-50px); /* Starting from the left */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0); /* Ending at the original position */
+    }
+  }
 `;
+
 
 const PageCon = styled.div`
   margin-bottom: 50px;
@@ -68,6 +82,10 @@ const HiSectionParagraph = styled.p`
   text-align: left;
   margin-bottom: 20px;
 
+   span {
+    color: #00BFFF; /* Set the color for specific text */
+  }
+
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -110,23 +128,25 @@ const ButtonContainer = styled.div`
     flex-direction: column;
   }
 `;
-
 const Button = styled.a`
-  background: #484848;
-  color: #000000;
-  border: 1px solid transparent;
+  position: relative;
+  background: transparent;
+  color: #00BFFF; /* Initial text color */
+  border: 2px solid #00BFFF; /* Border with the same color as the text */
   padding: 12px 24px;
   font-size: 16px;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease; /* Smooth transition for background, border, and text color */
   cursor: pointer;
   width: 200px;
   text-align: center;
   text-decoration: none;
+  overflow: hidden;
 
   &:hover {
-    color: #FFFFFF;
-    border-color: transparent;
+    background-color: #00BFFF; /* The background color to fill on hover */
+    color: #FFFFFF; /* Text color changes to white when background is filled */
+    border-color: transparent; /* Hide the border when background is filled */
   }
 
   @media (max-width: 768px) {
@@ -141,6 +161,7 @@ const Button = styled.a`
     font-size: 18px;
   }
 `;
+
 
 const Home = () => {
   return (
@@ -167,7 +188,7 @@ const Home = () => {
               />
             </HiSection>
             <HiSectionParagraph>
-              Undergraduate<br />
+              <span>Undergraduate</span><br />
               Reading for B.Sc. (Hons) Degree in Information Technology & Management (Expected in 2026)<br />
               University of Moratuwa
             </HiSectionParagraph>

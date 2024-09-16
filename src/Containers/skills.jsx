@@ -1,10 +1,38 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown, faCaretUp, faDesktop, faDatabase, faCodeBranch, faTools } from '@fortawesome/free-solid-svg-icons';
-import styled, { keyframes, css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
+
+// Import images
+import reactImage from '../../src/Images/React.webp';
+import reactNativeImage from '../../src/Images/reactnative.png';
+import nextImage from '../../src/Images/next.png';
+import nodeImage from '../../src/Images/node.webp';
+import jsImage from '../../src/Images/js.png';
+import htmlImage from '../../src/Images/html.jpeg';
+import cssImage from '../../src/Images/css.png';
+import mysqlImage from '../../src/Images/mysql.png';
+import mssqlImage from '../../src/Images/mssql.png';
+import mongoImage from '../../src/Images/mongo.png';
+import gitImage from '../../src/Images/git.png';
+import figmaImage from '../../src/Images/figma.webp';
+import postmanImage from '../../src/Images/postman.png';
+import blenderImage from '../../src/Images/blender.png';
+import gimpImage from '../../src/Images/gimp.png';
 
 const SkillsContainer = styled.div`
   padding: 20px;
+  animation: showRight 1s ease forwards;
+  animation-delay: 1.6s;
+  
+  @keyframes showRight {
+    from {
+      opacity: 0;
+      transform: translateX(-100px); /* Starting from the left */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0); /* Ending at the original position */
+    }
+  }
 `;
 
 const Title = styled.h1`
@@ -12,173 +40,90 @@ const Title = styled.h1`
   margin-bottom: 30px;
 `;
 
-const CardContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-`;
-
-const Card = styled.div`
-  flex: 1 1 calc(50% - 20px);
-  box-sizing: border-box;
-  margin-bottom: 20px;
-  overflow: hidden;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  padding: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-  }
-
-  @media (max-width: 768px) {
-    flex: 1 1 100%;
-  }
-`;
-
-const DropdownButton = styled.button`
-  display: flex;
-  align-items: center;
-  background-color: #484848;
-  border: 3px solid #383838;
-  border-radius: 7px;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #333333;
-  }
-`;
-
-const DropdownContent = styled.div`
-  overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-  max-height: ${props => (props.isOpen ? '200px' : '0px')};
-  opacity: ${props => (props.isOpen ? '1' : '0')};
-`;
-
-const fadeInSlideUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const pulse = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
-
-const DropdownList = styled.ul`
-  margin: 10px 0;
-  padding: 0;
-  list-style: none;
-  border: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: ${props => (props.isOpen ? '1' : '0')};
-  transform: ${props => (props.isOpen ? 'translateY(0)' : 'translateY(-10px)')};
-`;
-
-const ListItem = styled.li`
-  padding: 8px 10px;
-  font-size: 16px;
-  color: #484848;
-  animation: ${props => props.isOpen && css`${fadeInSlideUp} 0.3s ease forwards, ${pulse} 1s ease infinite`};
-`;
-
-const Icon = styled(FontAwesomeIcon)`
-  margin-right: 10px;
+const SectionTitle = styled.h2`
   color: #EC4899;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: left;
 `;
+
+const SectionContainer = styled.div`
+  margin-bottom: 40px; /* Space between sections */
+`;
+
+const TechnologyRow = styled.div`
+  display: flex;
+  gap: 20px; /* Space between items */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+`;
+
+const TechImage = styled.img`
+  width: 50px; /* Adjust size of image */
+  height: 50px; /* Adjust size of image */
+`;
+
+const TechnologyName = styled.p`
+  color: black; /* Change text color to black */
+  font-size: 14px; /* Adjusted font size */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Center the text under the image */
+`;
+
+const skillsSections = [
+  {
+    title: 'Web & Mobile Development',
+    technologies: [
+      { name: 'React', image: reactImage },
+      { name: 'React Native', image: reactNativeImage },
+      { name: 'Next.js', image: nextImage },
+      { name: 'Node.js', image: nodeImage },
+      { name: 'JavaScript', image: jsImage },
+      { name: 'HTML', image: htmlImage },
+      { name: 'CSS', image: cssImage },
+    ],
+  },
+  {
+    title: 'Database',
+    technologies: [
+      { name: 'MySQL', image: mysqlImage },
+      { name: 'MSSQL', image: mssqlImage },
+      { name: 'MongoDB', image: mongoImage },
+    ],
+  },
+  {
+    title: 'Version Control',
+    technologies: [
+      { name: 'GIT', image: gitImage },
+    ],
+  },
+  {
+    title: 'Other',
+    technologies: [
+      { name: 'Figma', image: figmaImage },
+      { name: 'Postman', image: postmanImage },
+      { name: 'Blender', image: blenderImage },
+      { name: 'GIMP', image: gimpImage },
+    ],
+  },
+];
 
 const Skills = () => {
-  const [isWebDevOpen, setIsWebDevOpen] = useState(false);
-  const [isDatabaseOpen, setIsDatabaseOpen] = useState(false);
-  const [isVersionControlOpen, setIsVersionControlOpen] = useState(false);
-  const [isOtherOpen, setIsOtherOpen] = useState(false);
-
   return (
     <SkillsContainer>
       <Title className="bold">Skills</Title>
-      <CardContainer>
-        <Card>
-          <DropdownButton onClick={() => setIsWebDevOpen(!isWebDevOpen)}>
-            <Icon icon={faDesktop} />
-            Web & Mobile Development
-            <Icon icon={isWebDevOpen ? faCaretUp : faCaretDown} style={{ marginLeft: 'auto' }} />
-          </DropdownButton>
-          <DropdownContent isOpen={isWebDevOpen}>
-            <DropdownList isOpen={isWebDevOpen}>
-              <ListItem isOpen={isWebDevOpen}>React</ListItem>
-              <ListItem isOpen={isWebDevOpen}>React Native</ListItem>
-              <ListItem isOpen={isWebDevOpen}>Node.js</ListItem>
-              <ListItem isOpen={isWebDevOpen}>JavaScript</ListItem>
-              <ListItem isOpen={isWebDevOpen}>HTML</ListItem>
-              <ListItem isOpen={isWebDevOpen}>CSS</ListItem>
-            </DropdownList>
-          </DropdownContent>
-        </Card>
-
-        <Card>
-          <DropdownButton onClick={() => setIsDatabaseOpen(!isDatabaseOpen)}>
-            <Icon icon={faDatabase} />
-            Database
-            <Icon icon={isDatabaseOpen ? faCaretUp : faCaretDown} style={{ marginLeft: 'auto' }} />
-          </DropdownButton>
-          <DropdownContent isOpen={isDatabaseOpen}>
-            <DropdownList isOpen={isDatabaseOpen}>
-              <ListItem isOpen={isDatabaseOpen}>MYSQL</ListItem>
-              <ListItem isOpen={isDatabaseOpen}>MSSQL</ListItem>
-              <ListItem isOpen={isDatabaseOpen}>MongoDB</ListItem>
-            </DropdownList>
-          </DropdownContent>
-        </Card>
-
-        <Card>
-          <DropdownButton onClick={() => setIsVersionControlOpen(!isVersionControlOpen)}>
-            <Icon icon={faCodeBranch} />
-            Version Control
-            <Icon icon={isVersionControlOpen ? faCaretUp : faCaretDown} style={{ marginLeft: 'auto' }} />
-          </DropdownButton>
-          <DropdownContent isOpen={isVersionControlOpen}>
-            <DropdownList isOpen={isVersionControlOpen}>
-              <ListItem isOpen={isVersionControlOpen}>GIT</ListItem>
-            </DropdownList>
-          </DropdownContent>
-        </Card>
-
-        <Card>
-          <DropdownButton onClick={() => setIsOtherOpen(!isOtherOpen)}>
-            <Icon icon={faTools} />
-            Other
-            <Icon icon={isOtherOpen ? faCaretUp : faCaretDown} style={{ marginLeft: 'auto' }} />
-          </DropdownButton>
-          <DropdownContent isOpen={isOtherOpen}>
-            <DropdownList isOpen={isOtherOpen}>
-              <ListItem isOpen={isOtherOpen}>Figma</ListItem>
-              <ListItem isOpen={isOtherOpen}>GIMP</ListItem>
-              <ListItem isOpen={isOtherOpen}>Blender</ListItem>
-              <ListItem isOpen={isOtherOpen}>Postman</ListItem>
-            </DropdownList>
-          </DropdownContent>
-        </Card>
-      </CardContainer>
+      {skillsSections.map((section, index) => (
+        <SectionContainer key={index}>
+          <SectionTitle>{section.title}</SectionTitle>
+          <TechnologyRow>
+            {section.technologies.map((tech, techIndex) => (
+              <div key={techIndex}>
+                <TechImage src={tech.image} alt={`${tech.name} logo`} />
+                <TechnologyName>{tech.name}</TechnologyName>
+              </div>
+            ))}
+          </TechnologyRow>
+        </SectionContainer>
+      ))}
     </SkillsContainer>
   );
 };

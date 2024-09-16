@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 // Import images
@@ -23,20 +23,22 @@ import hardware2 from '../Images/Hardware2.jpg';
 import hardware3 from '../Images/Hardware3.jpg';
 import hardware4 from '../Images/Hardware4.jpg';
 
+import coffeeShopVideo from '../videos/coffee.mp4'; 
+
 // Inline styles
 const styles = {
   projectCard: {
-    border: '3px solid #383838',
-    borderRadius: '7px',
     overflow: 'hidden',
     boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
-    background: '#484848',
     textAlign: 'center',
     maxWidth: '850px',
     margin: '0 auto',
     padding: '16px',
     animation: 'slideIn 1s ease-out',
     transition: 'transform 0.5s ease-in-out',
+    marginBottom: '40px',
+    border: '2px solid #caf0f8', // Add border to the project card
+    borderRadius: '8px', // Optional: Add rounded corners
   },
   imageContainer: {
     position: 'relative',
@@ -56,25 +58,17 @@ const styles = {
     flexShrink: 0,
     animation: 'fadeIn 1s ease-out',
   },
-  navigationButton: {
-    background: '#383838',
-    border: 'none',
-    color: '#fff',
-    padding: '12px',
-    fontSize: '15px',
-    borderRadius: '50%',
-    cursor: 'pointer',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-10%)',
-    transition: 'background-color 0.3s, transform 0.3s',
-    zIndex: 1,
+  videoContainer: {
+    position: 'relative',
+    overflow: 'hidden',
+    width: '700px',
+    height: '400px',
+    margin: '0 auto',
   },
-  prevButton: {
-    left: '5px',
-  },
-  nextButton: {
-    right: '5px',
+  video: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
   },
   projectDetails: {
     marginTop: '20px',
@@ -115,8 +109,8 @@ const styles = {
     color: '#fff',
   },
   header: {
-    color: '#EC4899',
-    textAlign: 'center',
+    color: '#ffffff',
+    textAlign: 'left',
     marginBottom: '20px',
     animation: 'fadeIn 1s ease-out',
   },
@@ -126,11 +120,11 @@ const styles = {
 const animationStyles = `
   @keyframes slideIn {
     from {
-      transform: translateY(30px);
+      transform: translateX(100px);
       opacity: 0;
     }
     to {
-      transform: translateY(0);
+      transform: translateX(0);
       opacity: 1;
     }
   }
@@ -156,7 +150,7 @@ insertAnimationStyles();
 
 // Project component
 const Project = ({ project }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
   const handlePrevious = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -176,10 +170,19 @@ const Project = ({ project }) => {
   });
 
   return (
-    <div>
-      <h1 className="bold" style={styles.header}>Projects</h1>
-      <div style={styles.projectCard}>
-        <div style={styles.imageContainer} {...swipeHandlers}>
+    <div style={styles.projectCard} {...swipeHandlers}>
+      {project.video ? (
+        <div style={styles.videoContainer}>
+          <video
+            controls
+            src={project.video}
+            style={styles.video}
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ) : (
+        <div style={styles.imageContainer}>
           <div
             style={{
               ...styles.imageCarousel,
@@ -195,44 +198,28 @@ const Project = ({ project }) => {
               />
             ))}
           </div>
-          {project.photos.length > 1 && (
-            <>
-              <button
-                onClick={handlePrevious}
-                style={{ ...styles.navigationButton, ...styles.prevButton }}
-              >
-                &#9664;
-              </button>
-              <button
-                onClick={handleNext}
-                style={{ ...styles.navigationButton, ...styles.nextButton }}
-              >
-                &#9654;
-              </button>
-            </>
-          )}
         </div>
-        <div style={styles.projectDetails}>
-          <h2 style={styles.projectTitle}>{project.title}</h2>
-          <h3 style={styles.description}>
-            {project.description.intro}
-          </h3>
-          <div style={styles.listContainer}>
-            <ul style={styles.list}>
-              {project.description.technologies.map((tech, index) => (
-                <li key={index}>{tech}</li>
-              ))}
-            </ul>
-          </div>
-          <a
-            href={project.repoLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={styles.projectLink}
-          >
-            View Repository
-          </a>
+      )}
+      <div style={styles.projectDetails}>
+        <h2 style={styles.projectTitle}>{project.title}</h2>
+        <h3 style={styles.description}>
+          {project.description.intro}
+        </h3>
+        <div style={styles.listContainer}>
+          <ul style={styles.list}>
+            {project.description.technologies.map((tech, index) => (
+              <li key={index}>{tech}</li>
+            ))}
+          </ul>
         </div>
+        <a
+          href={project.repoLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={styles.projectLink}
+        >
+          View Repository
+        </a>
       </div>
     </div>
   );
@@ -240,8 +227,6 @@ const Project = ({ project }) => {
 
 // Projects component
 const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const projects = [
     {
       title: 'PART TIME JOB OFFERING PLATFORM (LEVEL 2 SOFTWARE PROJECT)',
@@ -251,6 +236,24 @@ const Projects = () => {
       },
       photos: [software1, software2, software3, software4, software5, software6, software7, software8, software9, software10, software11, software12, software13, software14, software15, software16],
       repoLink: 'https://github.com/AnjalikaTSG/Porthfolio/tree/master',
+    },
+    {
+      title: 'COFFEE SHOP WEB SITE (ONGOING)',
+      description: {
+        intro: 'Developed a responsive and interactive website for a coffee shop. The project included designing and implementing multiple sections. It includes a smooth scrolling navigation system and interactive product elements.',
+        technologies: ['NextJS']
+      },
+      video: coffeeShopVideo,
+      repoLink: 'https://chai-chamlet-cafe.vercel.app/',
+    },
+    {
+      title: 'PERSONAL PORTFOLIO WEB SITE',
+      description: {
+        intro: 'Developed a fully responsive portfolio website to showcase my projects, skills, and experience. The website features smooth navigation and a dark/light theme toggle. It includes various sections like About, Skills, Projects, and Contact, along with custom animations for a modern and engaging user experience.',
+        technologies: ['React']
+      },
+      photos: [hardware1, hardware2, hardware3, hardware4],
+      repoLink: 'https://gihani.vercel.app/',
     },
     {
       title: 'PORTABLE SECURITY BOX (LEVEL 1 HARDWARE PROJECT)',
@@ -263,33 +266,12 @@ const Projects = () => {
     },
   ];
 
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : projects.length - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex < projects.length - 1 ? prevIndex + 1 : 0
-    );
-  };
-
   return (
     <div>
-      <button
-        onClick={handlePrevious}
-        style={{ ...styles.navigationButton, ...styles.prevButton }}
-      >
-        &#9664;
-      </button>
-      <Project project={projects[currentIndex]} />
-      <button
-        onClick={handleNext}
-        style={{ ...styles.navigationButton, ...styles.nextButton }}
-      >
-        &#9654;
-      </button>
+      <h1 style={styles.header}>Projects</h1>
+      {projects.map((project, index) => (
+        <Project key={index} project={project} />
+      ))}
     </div>
   );
 };
