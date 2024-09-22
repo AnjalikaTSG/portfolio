@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import reactImage from '../../src/Images/React.webp';
 import reactNativeImage from '../../src/Images/reactnative.png';
 import nextImage from '../../src/Images/next.png';
-import nodeImage from '../../src/Images/node.webp';
+import nodeImage from '../../src/Images/node.png';
 import jsImage from '../../src/Images/js.png';
-import htmlImage from '../../src/Images/html.jpeg';
+import htmlImage from '../../src/Images/html.png';
 import cssImage from '../../src/Images/css.png';
 import mysqlImage from '../../src/Images/mysql.png';
 import mssqlImage from '../../src/Images/mssql.png';
@@ -41,7 +41,7 @@ const Title = styled.h1`
 `;
 
 const SectionTitle = styled.h2`
-  color: #EC4899;
+  color: white;
   font-size: 1.8rem;
   margin-bottom: 20px;
   text-align: left;
@@ -60,12 +60,13 @@ const TechnologyRow = styled.div`
 const TechImage = styled.img`
   width: 50px; /* Adjust size of image */
   height: 50px; /* Adjust size of image */
+  display: block; /* Ensure images are block-level elements */
 `;
 
 const TechnologyName = styled.p`
-  color: black; /* Change text color to black */
+  color: white; /* Change text color to black */
   font-size: 14px; /* Adjusted font size */
-  margin: 0; /* Remove default margin */
+  margin: 5px 0 0 0; /* Margin to position text below the image */
   text-align: center; /* Center the text under the image */
 `;
 

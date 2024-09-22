@@ -29,6 +29,7 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className="form-container">
+                    <h2>Get in Touch</h2>
                     <form onSubmit={handleSubmit}>
                         <input
                             type="text"
@@ -91,6 +92,8 @@ const Contact = () => {
                     display: flex;
                     flex-direction: column;
                     gap: 20px;
+                    width: 100%; /* Full width */
+                    max-width: 700px; /* Set a larger max width */
                 }
 
                 .card {
@@ -98,7 +101,7 @@ const Contact = () => {
                     max-width: 500px;
                     padding: 20px;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    text-align: center;
+                    text-align: left;
                     color: #fff;
                     transition: transform 0.3s, box-shadow 0.3s;
                 }
@@ -156,11 +159,12 @@ const Contact = () => {
                     }
 
                     .info-container {
-                        margin-right: 20px;
+                        margin-right: 10px; /* Adjust this value to reduce space */
                     }
 
                     .form-container {
-                        max-width: 500px;
+                        max-width: 1000px; /* Increased max-width for larger screens */
+                        margin-left: 0; /* Ensure there's no extra space on the left side */
                     }
                 }
 

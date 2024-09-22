@@ -16,7 +16,7 @@ const NavLink = ({ href, title }) => {
                     }
 
                     .link:hover {
-                        background-color: #DD9BCF; /* Yellow background on hover */
+                        background-color: #caf0f8; /* Yellow background on hover */
                         color: #2d2d2d; /* Dark gray text color on hover */
                     }
                 `}

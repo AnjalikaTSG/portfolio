@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import CVImage from "../Images/CV.png";
 import { TypeAnimation } from "react-type-animation";
@@ -7,6 +6,8 @@ import Skills from "./skills";
 import Projects from "./projects";
 import Contact from "./contact";
 import styled from 'styled-components';
+import Footer from "./footer";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const PageContainer = styled.div`
   margin: 30px;
@@ -26,7 +27,6 @@ const PageContainer = styled.div`
     }
   }
 `;
-
 
 const PageCon = styled.div`
   margin-bottom: 50px;
@@ -65,7 +65,7 @@ const HiSection = styled.h1`
   line-height: 1.2;
 
   .gradientText {
-    background: linear-gradient(to right, #C6FAD2, #DD9BCF);
+    background: linear-gradient(to right, #caf0f8, #00BFFF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -82,7 +82,7 @@ const HiSectionParagraph = styled.p`
   text-align: left;
   margin-bottom: 20px;
 
-   span {
+  span {
     color: #00BFFF; /* Set the color for specific text */
   }
 
@@ -128,6 +128,7 @@ const ButtonContainer = styled.div`
     flex-direction: column;
   }
 `;
+
 const Button = styled.a`
   position: relative;
   background: transparent;
@@ -162,11 +163,45 @@ const Button = styled.a`
   }
 `;
 
+const IconSidebar = styled.div`
+  position: absolute;
+  top: 50px;
+  right: 30px; /* Adjust this to move it further or closer to the right */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .link {
+    color: #ffffff;
+    font-size: 24px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #00BFFF;
+    }
+  }
+
+  @media (max-width: 768px) {
+    right: 10px; /* Adjust for smaller screens */
+  }
+`;
+
+const FooterSection = styled.div`
+  margin-top: 50px; /* Ensure there is space above the footer */
+`;
 
 const Home = () => {
   return (
     <PageContainer>
       <PageCon id="home">
+        <IconSidebar>
+          <a href="https://github.com/AnjalikaTSG" target="_blank" rel="noopener noreferrer" className="link">
+            <FaGithub className="icon" />
+          </a>
+          <a href="https://www.linkedin.com/in/gihani-anjalika-90a6882a6/" target="_blank" rel="noopener noreferrer" className="link">
+            <FaLinkedin className="icon" />
+          </a>
+        </IconSidebar>
         <Container>
           <TextSection>
             <HiSection>
@@ -214,6 +249,9 @@ const Home = () => {
       <div id="contact">
         <Contact />
       </div>
+      <FooterSection>
+        <Footer />
+      </FooterSection>
     </PageContainer>
   );
 };

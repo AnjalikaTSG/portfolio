@@ -2,28 +2,13 @@ import React from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 // Import images
-import software1 from '../Images/software1.jpg';
-import software2 from '../Images/software2.jpg';
-import software3 from '../Images/software3.jpg';
-import software4 from '../Images/software4.jpg';
-import software5 from '../Images/software5.jpg';
-import software6 from '../Images/software6.jpg';
-import software7 from '../Images/software7.jpg';
-import software8 from '../Images/software8.jpg';
-import software9 from '../Images/software9.jpg';
-import software10 from '../Images/software10.jpg';
-import software11 from '../Images/software11.jpg';
-import software12 from '../Images/software12.jpg';
-import software13 from '../Images/software13.jpg';
-import software14 from '../Images/software14.jpg';
-import software15 from '../Images/Software15.jpg';
-import software16 from '../Images/software16.jpg';
 import hardware1 from '../Images/Hardware1.jpg';
 import hardware2 from '../Images/Hardware2.jpg';
 import hardware3 from '../Images/Hardware3.jpg';
 import hardware4 from '../Images/Hardware4.jpg';
 
-import coffeeShopVideo from '../videos/coffee.mp4'; 
+import job from '../videos/job.mp4';
+import coffeeShopVideo from '../videos/coffee.mp4';
 
 // Inline styles
 const styles = {
@@ -37,8 +22,16 @@ const styles = {
     animation: 'slideIn 1s ease-out',
     transition: 'transform 0.5s ease-in-out',
     marginBottom: '40px',
-    border: '2px solid #caf0f8', // Add border to the project card
-    borderRadius: '8px', // Optional: Add rounded corners
+    border: '2px solid #caf0f8',
+    borderRadius: '8px',
+    flex: '1 1 calc(50% - 20px)', // Flex-grow and width definition for larger screens
+  },
+  projectContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    gap: '20px',
+    marginBottom: '40px',
   },
   imageContainer: {
     position: 'relative',
@@ -88,14 +81,20 @@ const styles = {
     color: '#fff',
   },
   projectLink: {
-    display: 'inline-block',
-    background: '#383838',
+    display: 'inline-flex',
+    alignItems: 'center',
     color: '#fff',
     padding: '10px 20px',
     textDecoration: 'none',
     borderRadius: '8px',
     marginTop: '16px',
     transition: 'background-color 0.3s, transform 0.3s',
+  },
+  arrowIcon: {
+    marginLeft: '8px',
+    width: '16px',
+    height: '16px',
+    fill: '#fff',
   },
   listContainer: {
     textAlign: 'center',
@@ -108,11 +107,40 @@ const styles = {
     paddingLeft: '20px',
     color: '#fff',
   },
+  technologyItem: {
+    padding: '4px 8px',
+    margin: '4px',
+    display: 'inline-block',
+    border: '2px solid #caf0f8',
+    color: '#fff',
+    borderRadius: '5px',
+    fontSize: '14px',
+  },
   header: {
     color: '#ffffff',
     textAlign: 'left',
     marginBottom: '20px',
     animation: 'fadeIn 1s ease-out',
+  },
+
+  // Media query for small screens
+  '@media (max-width: 768px)': {
+    projectCard: {
+      flex: '1 1 100%',
+      maxWidth: '100%',
+    },
+    projectContainer: {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    imageContainer: {
+      width: '100%',
+      height: '400px',
+    },
+    videoContainer: {
+      width: '100%',
+      height: '300px',
+    },
   },
 };
 
@@ -173,11 +201,7 @@ const Project = ({ project }) => {
     <div style={styles.projectCard} {...swipeHandlers}>
       {project.video ? (
         <div style={styles.videoContainer}>
-          <video
-            controls
-            src={project.video}
-            style={styles.video}
-          >
+          <video controls src={project.video} style={styles.video}>
             Your browser does not support the video tag.
           </video>
         </div>
@@ -202,13 +226,11 @@ const Project = ({ project }) => {
       )}
       <div style={styles.projectDetails}>
         <h2 style={styles.projectTitle}>{project.title}</h2>
-        <h3 style={styles.description}>
-          {project.description.intro}
-        </h3>
+        <h3 style={styles.description}>{project.description.intro}</h3>
         <div style={styles.listContainer}>
           <ul style={styles.list}>
             {project.description.technologies.map((tech, index) => (
-              <li key={index}>{tech}</li>
+              <li key={index} style={styles.technologyItem}>{tech}</li>
             ))}
           </ul>
         </div>
@@ -216,9 +238,12 @@ const Project = ({ project }) => {
           href={project.repoLink}
           target="_blank"
           rel="noopener noreferrer"
-          style={styles.projectLink}
+          style={{ ...styles.projectLink, justifyContent: 'space-between' }}
         >
           View Repository
+          <svg style={styles.arrowIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2L15.59 5.59 11.17 10H22v2H11.17l4.42 4.41L12 22l-10-10z"/>
+          </svg>
         </a>
       </div>
     </div>
@@ -231,17 +256,19 @@ const Projects = () => {
     {
       title: 'PART TIME JOB OFFERING PLATFORM (LEVEL 2 SOFTWARE PROJECT)',
       description: {
-        intro: 'This platform is developed for part-time job seekers and job posters. It includes a mobile application and a web application. In this project, I have implemented the functionalities of the job poster. Technologies used:',
-        technologies: ['React Native', 'React', 'Node.js', 'MySQL']
+        intro:
+          'This platform is developed for part-time job seekers and job posters. It includes a mobile application and a web application. In this project, I have implemented the functionalities of the job poster. Technologies used:',
+        technologies: ['React Native', 'React', 'Node.js', 'MySQL'],
       },
-      photos: [software1, software2, software3, software4, software5, software6, software7, software8, software9, software10, software11, software12, software13, software14, software15, software16],
+      video: job,
       repoLink: 'https://github.com/AnjalikaTSG/Porthfolio/tree/master',
     },
     {
       title: 'COFFEE SHOP WEB SITE (ONGOING)',
       description: {
-        intro: 'Developed a responsive and interactive website for a coffee shop. The project included designing and implementing multiple sections. It includes a smooth scrolling navigation system and interactive product elements.',
-        technologies: ['NextJS']
+        intro:
+          'Developed a responsive and interactive website for a coffee shop. The project included designing and implementing multiple sections. It includes a smooth scrolling navigation system and interactive product elements.',
+        technologies: ['NextJS'],
       },
       video: coffeeShopVideo,
       repoLink: 'https://chai-chamlet-cafe.vercel.app/',
@@ -249,8 +276,9 @@ const Projects = () => {
     {
       title: 'PERSONAL PORTFOLIO WEB SITE',
       description: {
-        intro: 'Developed a fully responsive portfolio website to showcase my projects, skills, and experience. The website features smooth navigation and a dark/light theme toggle. It includes various sections like About, Skills, Projects, and Contact, along with custom animations for a modern and engaging user experience.',
-        technologies: ['React']
+        intro:
+          'Developed a fully responsive portfolio website to showcase my projects, skills, and experience. The website features smooth navigation and a dark/light theme toggle. It includes various sections like About, Skills, Projects, and Contact, along with custom animations for a modern and engaging user experience.',
+        technologies: ['React'],
       },
       photos: [hardware1, hardware2, hardware3, hardware4],
       repoLink: 'https://gihani.vercel.app/',
@@ -258,17 +286,17 @@ const Projects = () => {
     {
       title: 'PORTABLE SECURITY BOX (LEVEL 1 HARDWARE PROJECT)',
       description: {
-        intro: 'This project was created to develop a secure, portable storage solution for valuable items. The system includes object detection, fingerprint verification, PIN authentication, location tracking, motion detection, and an alarm system. In this project, I was responsible for the fingerprint authentication process.',
-        technologies: ['Object Detection', 'Fingerprint Verification', 'PIN Authentication', 'Location Tracking']
+        intro:
+          'This project was created to showcase a portable security box that includes an alarm system triggered by unauthorized access. It was designed for educational purposes and implemented using basic electronic components.',
+        technologies: ['Arduino', 'C++'],
       },
       photos: [hardware1, hardware2, hardware3, hardware4],
-      repoLink: 'https://github.com/user/project2',
+      repoLink: 'https://github.com/AnjalikaTSG/Portable-Security-Box',
     },
   ];
 
   return (
-    <div>
-      <h1 style={styles.header}>Projects</h1>
+    <div style={styles.projectContainer}>
       {projects.map((project, index) => (
         <Project key={index} project={project} />
       ))}

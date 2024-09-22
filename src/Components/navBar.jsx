@@ -5,9 +5,9 @@ import { FaSun, FaMoon } from 'react-icons/fa'; // Import theme icons
 const navLink = [
     { title: 'Home', path: '#home' },
     { title: 'About', path: '#about' },
-    { title: 'Contact', path: '#contact' },
+    { title: 'Skills', path: '#skills' },
     { title: 'Projects', path: '#projects' },
-    { title: 'Skills', path: '#skills' }
+    { title: 'Contact', path: '#contact' },
 ];
 
 const NavBar = () => {
@@ -87,7 +87,7 @@ const NavBar = () => {
                     }
 
                     .logo:hover {
-                        color: #DD9BCF;
+                        color: #caf0f8;
                     }
 
                     .menu {
@@ -115,7 +115,7 @@ const NavBar = () => {
                     }
 
                     .menuItem:hover {
-                        background-color: #DD9BCF;
+                        background-color: #caf0f8;
                         color: #000;
                     }
 

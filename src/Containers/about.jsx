@@ -204,6 +204,11 @@ const About = () => {
 
                 .category {
                     margin-bottom: 20px;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                .category:hover {
+                    transform: scale(1.1); /* Slightly larger zoom */
                 }
 
                 .no-bullets {
