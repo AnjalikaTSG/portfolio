@@ -79,9 +79,6 @@ const AboutFront = () => {
                     font-size: 15px;
                     margin: 30px 0;
                     font-family: sans-serif;
-                    position: relative;
-                    animation: showRight 1s ease forwards;
-                    animation-delay: 1.6s;
                 }
 
                 .about-container {
@@ -118,20 +115,26 @@ const AboutFront = () => {
 
                 .education-boxes {
                     display: flex;
-                    justify-content: space-between; /* Align boxes side by side */
+                    justify-content: space-between;
                     gap: 20px;
                 }
 
                 .education-box {
                     flex: 1;
-                    border: 2px solid #caf0f8; /* Added border */
+                    border: 2px solid #caf0f8;
                     padding: 15px;
-                    border-radius: 10px; /* Rounded corners */
+                    border-radius: 10px;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+                }
+
+                .education-box:hover {
+                    transform: scale(1.05); /* Scale on hover */
+                    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
                 }
 
                 .certification-experience {
                     display: flex;
-                    justify-content: space-between; /* Align certification and experience side by side */
+                    justify-content: space-between;
                     gap: 20px;
                     margin-top: 20px;
                 }
@@ -141,18 +144,31 @@ const AboutFront = () => {
                     flex: 1;
                 }
 
+                .certification .education-box,
+                .experience .education-box {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+                }
+
+                .certification .education-box:hover,
+                .experience .education-box:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                }
+
                 .icon {
-                    font-size: 3rem; /* Increased icon size */
+                    font-size: 3rem;
                     color: white;
-                    transition: color 0.3s;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s;
                 }
 
                 .icon:hover {
-                    color: #3498db; /* Icon hover color */
+                    transform: scale(1.5); /* Scale the icon on hover */
+                    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Add shadow to the icon on hover */
+                    color: #3498db; /* Change color on hover */
                 }
 
                 h2.bold {
-                    margin-bottom: 15px; /* Added margin-bottom */
+                    margin-bottom: 15px;
                     font-weight: bold;
                 }
 
@@ -176,12 +192,12 @@ const AboutFront = () => {
                     }
 
                     .icon {
-                        font-size: 2rem; /* Adjusted for smaller screens */
+                        font-size: 2rem;
                     }
 
                     .education-boxes,
                     .certification-experience {
-                        flex-direction: column; /* Stack boxes on small screens */
+                        flex-direction: column;
                     }
                 }
             `}</style>

@@ -57,14 +57,45 @@ const TechnologyRow = styled.div`
   flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
 `;
 
+const TechImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1); /* Slight zoom-in effect on hover */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  }
+`;
+
 const TechImage = styled.img`
   width: 50px; /* Adjust size of image */
   height: 50px; /* Adjust size of image */
   display: block; /* Ensure images are block-level elements */
+  animation: showTech 0.8s ease forwards;
+  opacity: 0; /* Initially hidden */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for hover effects */
+
+  @keyframes showTech {
+    from {
+      opacity: 0;
+      transform: translateX(-100px); /* Slide in from left */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0); /* End in place */
+    }
+  }
+
+  &:nth-child(odd) {
+    animation-delay: 0.3s;
+  }
 `;
 
 const TechnologyName = styled.p`
-  color: white; /* Change text color to black */
+  color: white; /* Change text color to white */
   font-size: 14px; /* Adjusted font size */
   margin: 5px 0 0 0; /* Margin to position text below the image */
   text-align: center; /* Center the text under the image */
@@ -117,10 +148,10 @@ const Skills = () => {
           <SectionTitle>{section.title}</SectionTitle>
           <TechnologyRow>
             {section.technologies.map((tech, techIndex) => (
-              <div key={techIndex}>
+              <TechImageContainer key={techIndex}>
                 <TechImage src={tech.image} alt={`${tech.name} logo`} />
                 <TechnologyName>{tech.name}</TechnologyName>
-              </div>
+              </TechImageContainer>
             ))}
           </TechnologyRow>
         </SectionContainer>

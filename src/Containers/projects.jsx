@@ -20,11 +20,16 @@ const styles = {
     margin: '0 auto',
     padding: '16px',
     animation: 'slideIn 1s ease-out',
-    transition: 'transform 0.5s ease-in-out',
+    transition: 'transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out',
     marginBottom: '40px',
     border: '2px solid #caf0f8',
     borderRadius: '8px',
-    flex: '1 1 calc(50% - 20px)', // Flex-grow and width definition for larger screens
+    flex: '1 1 calc(50% - 20px)',
+    position: 'relative',
+  },
+  projectCardHover: {
+    transform: 'scale(1.05)', // Slight zoom-in effect on hover
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)', // Elevates the card with a stronger shadow
   },
   projectContainer: {
     display: 'flex',
@@ -179,6 +184,7 @@ insertAnimationStyles();
 // Project component
 const Project = ({ project }) => {
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const handlePrevious = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -198,7 +204,15 @@ const Project = ({ project }) => {
   });
 
   return (
-    <div style={styles.projectCard} {...swipeHandlers}>
+    <div
+      style={{
+        ...styles.projectCard,
+        ...(isHovered ? styles.projectCardHover : {}),
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      {...swipeHandlers}
+    >
       {project.video ? (
         <div style={styles.videoContainer}>
           <video controls src={project.video} style={styles.video}>
@@ -277,11 +291,11 @@ const Projects = () => {
       title: 'PERSONAL PORTFOLIO WEB SITE',
       description: {
         intro:
-          'Developed a fully responsive portfolio website to showcase my projects, skills, and experience. The website features smooth navigation and a dark/light theme toggle. It includes various sections like About, Skills, Projects, and Contact, along with custom animations for a modern and engaging user experience.',
+          'eveloped a fully responsive portfolio website to showcase my projects, skills, and experience. The website features smooth navigation and a dark/light theme toggle. It includes various sections like About, Skills, Projects, and Contact, along with custom animations for a modern and engaging user experience.',
         technologies: ['React'],
       },
       photos: [hardware1, hardware2, hardware3, hardware4],
-      repoLink: 'https://gihani.vercel.app/',
+      repoLink: 'https://github.com/AnjalikaTSG/Porthfolio/tree/master',
     },
     {
       title: 'PORTABLE SECURITY BOX (LEVEL 1 HARDWARE PROJECT)',
