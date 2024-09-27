@@ -7,9 +7,6 @@ import hardware2 from '../Images/Hardware2.jpg';
 import hardware3 from '../Images/Hardware3.jpg';
 import hardware4 from '../Images/Hardware4.jpg';
 
-import job from '../videos/coffee.mp4';
-import coffeeShopVideo from '../videos/coffee.mp4';
-
 // Inline styles
 const styles = {
   projectCard: {
@@ -274,7 +271,7 @@ const Projects = () => {
           'This platform is developed for part-time job seekers and job posters. It includes a mobile application and a web application. In this project, I have implemented the functionalities of the job poster. Technologies used:',
         technologies: ['React Native', 'React', 'Node.js', 'MySQL'],
       },
-      video: job,
+      photos: [hardware1, hardware2, hardware3, hardware4],
       repoLink: 'https://github.com/AnjalikaTSG/Porthfolio/tree/master',
     },
     {
@@ -284,7 +281,7 @@ const Projects = () => {
           'Developed a responsive and interactive website for a coffee shop. The project included designing and implementing multiple sections. It includes a smooth scrolling navigation system and interactive product elements.',
         technologies: ['NextJS'],
       },
-      video: coffeeShopVideo,
+      photos: [hardware1, hardware2, hardware3, hardware4],
       repoLink: 'https://chai-chamlet-cafe.vercel.app/',
     },
     {
