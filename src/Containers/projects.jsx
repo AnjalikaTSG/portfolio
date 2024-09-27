@@ -7,7 +7,7 @@ import hardware2 from '../Images/Hardware2.jpg';
 import hardware3 from '../Images/Hardware3.jpg';
 import hardware4 from '../Images/Hardware4.jpg';
 
-import job from '../videos/job.mp4';
+import job from '../videos/coffee.mp4';
 import coffeeShopVideo from '../videos/coffee.mp4';
 
 // Inline styles
