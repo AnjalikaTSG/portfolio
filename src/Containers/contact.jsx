@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import emailjs from 'emailjs-com'; // Updated import statement
 
 const Contact = () => {
     const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -10,7 +13,19 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
+        // EmailJS service configuration
+        emailjs.send('service_x5rsava', 'template_qdxhbbj', form, 'jwk9vhF-fqRN6iJil')
+            .then((response) => {
+                console.log('Email sent successfully!', response.status, response.text);
+                setSuccessMessage('Your message has been sent successfully!');
+                setErrorMessage('');
+                setForm({ name: '', email: '', message: '' }); // Reset form fields
+            })
+            .catch((error) => {
+                console.error('Failed to send email:', error);
+                setErrorMessage('There was an error sending your message. Please try again later.');
+                setSuccessMessage('');
+            });
     };
 
     return (
@@ -56,6 +71,8 @@ const Contact = () => {
                         />
                         <button type="submit">Send Message</button>
                     </form>
+                    {successMessage && <p className="success-message">{successMessage}</p>}
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </div>
             </div>
             <style jsx>{`
@@ -134,7 +151,7 @@ const Contact = () => {
 
                 .form-container button {
                     padding: 10px;
-                    background-color:#00BFFF;
+                    background-color: #00BFFF;
                     border: none;
                     border-radius: 4px;
                     color: white;
@@ -145,6 +162,16 @@ const Contact = () => {
 
                 .form-container button:hover {
                     background-color: #0077b6;
+                }
+
+                .success-message {
+                    color: #28a745; /* Green color for success */
+                    margin-top: 10px;
+                }
+
+                .error-message {
+                    color: #dc3545; /* Red color for error */
+                    margin-top: 10px;
                 }
 
                 @media (min-width: 768px) {

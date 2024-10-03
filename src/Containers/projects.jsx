@@ -6,6 +6,23 @@ import hardware1 from '../Images/Hardware1.jpg';
 import hardware2 from '../Images/Hardware2.jpg';
 import hardware3 from '../Images/Hardware3.jpg';
 import hardware4 from '../Images/Hardware4.jpg';
+import software1 from '../Images/1.jpg';
+import software2 from '../Images/2.jpg';
+import software3 from '../Images/3.jpg';
+import software4 from '../Images/4.jpg';
+import software5 from '../Images/5.jpg';
+import software6 from '../Images/6.jpg';
+import software7 from '../Images/7.jpg';
+import software8 from '../Images/8.jpg';
+import software9 from '../Images/9.jpg';
+import software10 from '../Images/10.jpg';
+import software11 from '../Images/11.jpg';
+import software12 from '../Images/12.jpg';
+import software13 from '../Images/13.jpg';
+import software14 from '../Images/14.jpg';
+import software15 from '../Images/15.jpg';
+import coffee1 from '../Images/coffee1.png';
+import porthfolio from '../Images/porthfolio.png';
 
 // Inline styles
 const styles = {
@@ -38,9 +55,13 @@ const styles = {
   imageContainer: {
     position: 'relative',
     overflow: 'hidden',
-    width: '300px',
-    height: '600px',
+    width: '300px', // default image width
+    height: '600px', // default image height
     margin: '0 auto',
+  },
+  rectangleImageContainer: {
+    width: '600px', // wider rectangle shape
+    height: '300px', // shorter height
   },
   imageCarousel: {
     display: 'flex',
@@ -52,6 +73,10 @@ const styles = {
     objectFit: 'cover',
     flexShrink: 0,
     animation: 'fadeIn 1s ease-out',
+  },
+  rectangleImageItem: {
+    width: '600px', // match rectangle container width
+    height: '300px', // match rectangle container height
   },
   videoContainer: {
     position: 'relative',
@@ -179,7 +204,7 @@ const insertAnimationStyles = () => {
 insertAnimationStyles();
 
 // Project component
-const Project = ({ project }) => {
+const Project = ({ project, isRectangle }) => {
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -210,31 +235,33 @@ const Project = ({ project }) => {
       onMouseLeave={() => setIsHovered(false)}
       {...swipeHandlers}
     >
-      {project.video ? (
-        <div style={styles.videoContainer}>
-          <video controls src={project.video} style={styles.video}>
-            Your browser does not support the video tag.
-          </video>
+      <div
+        style={
+          isRectangle
+            ? { ...styles.rectangleImageContainer }
+            : { ...styles.imageContainer }
+        }
+      >
+        <div
+          style={{
+            ...styles.imageCarousel,
+            transform: `translateX(-${currentImageIndex * 300}px)`,
+          }}
+        >
+          {project.photos.map((photo, index) => (
+            <img
+              key={index}
+              src={photo}
+              alt={project.title}
+              style={
+                isRectangle
+                  ? { ...styles.rectangleImageItem }
+                  : { ...styles.imageItem }
+              }
+            />
+          ))}
         </div>
-      ) : (
-        <div style={styles.imageContainer}>
-          <div
-            style={{
-              ...styles.imageCarousel,
-              transform: `translateX(-${currentImageIndex * 300}px)`,
-            }}
-          >
-            {project.photos.map((photo, index) => (
-              <img
-                key={index}
-                src={photo}
-                alt={project.title}
-                style={styles.imageItem}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      </div>
       <div style={styles.projectDetails}>
         <h2 style={styles.projectTitle}>{project.title}</h2>
         <h3 style={styles.description}>{project.description.intro}</h3>
@@ -261,58 +288,85 @@ const Project = ({ project }) => {
   );
 };
 
-// Projects component
 const Projects = () => {
   const projects = [
     {
       title: 'PART TIME JOB OFFERING PLATFORM (LEVEL 2 SOFTWARE PROJECT)',
+      photos: [
+        software1,
+        software2,
+        software3,
+        software4,
+        software5,
+        software6,
+        software7,
+        software8,
+        software9,
+        software10,
+        software11,
+        software12,
+        software13,
+        software14,
+        software15,
+      ],
       description: {
         intro:
-          'This platform is developed for part-time job seekers and job posters. It includes a mobile application and a web application. In this project, I have implemented the functionalities of the job poster. Technologies used:',
-        technologies: ['React Native', 'React', 'Node.js', 'MySQL'],
+          'This platform is developed for part-time job seekers and job posters. It includes a mobile application and a web application. In this project, I have implemented the functionalities of the job poster.',
+        technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
       },
-      photos: [hardware1, hardware2, hardware3, hardware4],
-      repoLink: 'https://github.com/AnjalikaTSG/Porthfolio/tree/master',
+      repoLink: 'https://github.com/AnjalikaTSG/Frontend',
     },
     {
-      title: 'COFFEE SHOP WEB SITE (ONGOING)',
+      title: 'COFFEE SHOP WEB SITE',
+      photos: [coffee1], // Add coffee1 image here
       description: {
         intro:
           'Developed a responsive and interactive website for a coffee shop. The project included designing and implementing multiple sections. It includes a smooth scrolling navigation system and interactive product elements.',
-        technologies: ['NextJS'],
+        technologies: ['NextJS', 'CSS'],
       },
-      photos: [hardware1, hardware2, hardware3, hardware4],
-      repoLink: 'https://chai-chamlet-cafe.vercel.app/',
+      repoLink: 'https://github.com/AnjalikaTSG/ChaiChamlet-_cafe',
     },
     {
       title: 'PERSONAL PORTFOLIO WEB SITE',
+      photos: [
+        porthfolio
+      ],
       description: {
         intro:
-          'eveloped a fully responsive portfolio website to showcase my projects, skills, and experience. The website features smooth navigation and a dark/light theme toggle. It includes various sections like About, Skills, Projects, and Contact, along with custom animations for a modern and engaging user experience.',
-        technologies: ['React'],
+          'Developed a fully responsive portfolio website to showcase my projects, skills, and experience. The website features smooth navigation and a dark/light theme toggle. It includes various sections like About, Skills, Projects, and Contact, along with custom animations for a modern and engaging user experience.',
+        technologies: ['React', 'CSS'],
       },
-      photos: [hardware1, hardware2, hardware3, hardware4],
-      repoLink: 'https://github.com/AnjalikaTSG/Porthfolio/tree/master',
+      repoLink: 'https://github.com/AnjalikaTSG/portfolio',
     },
     {
       title: 'PORTABLE SECURITY BOX (LEVEL 1 HARDWARE PROJECT)',
+      photos: [
+        hardware1,
+        hardware2,
+        hardware3,
+        hardware4,
+      ],
       description: {
         intro:
           'This project was created to showcase a portable security box that includes an alarm system triggered by unauthorized access. It was designed for educational purposes and implemented using basic electronic components.',
         technologies: ['Arduino', 'C++'],
       },
-      photos: [hardware1, hardware2, hardware3, hardware4],
-      repoLink: 'https://github.com/AnjalikaTSG/Portable-Security-Box',
+      repoLink: 'https://github.com/AnjalikaTSG',
     },
   ];
 
   return (
     <div style={styles.projectContainer}>
       {projects.map((project, index) => (
-        <Project key={index} project={project} />
+        <Project
+          key={index}
+          project={project}
+          isRectangle={project.title === 'COFFEE SHOP WEB SITE' || project.title === 'PERSONAL PORTFOLIO WEB SITE'} // Make both coffee and portfolio projects rectangular
+        />
       ))}
     </div>
   );
 };
 
 export default Projects;
+
