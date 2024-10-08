@@ -3,30 +3,62 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import emailjs from 'emailjs-com'; // Updated import statement
 
 const Contact = () => {
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
+    const sendEmail = (e) => {
         e.preventDefault();
-        // EmailJS service configuration
-        emailjs.send('service_x5rsava', 'template_qdxhbbj', form, 'jwk9vhF-fqRN6iJil')
-            .then((response) => {
-                console.log('Email sent successfully!', response.status, response.text);
-                setSuccessMessage('Your message has been sent successfully!');
-                setErrorMessage('');
-                setForm({ name: '', email: '', message: '' }); // Reset form fields
-            })
-            .catch((error) => {
-                console.error('Failed to send email:', error);
-                setErrorMessage('There was an error sending your message. Please try again later.');
-                setSuccessMessage('');
-            });
+        setSuccessMessage("");
+        setErrorMessage("");
+
+        if(!name || !email || !message){
+            setErrorMessage("please fill all the fields");
+            return;
+        }
+        const templatePrams ={
+            from_name: name,
+            to_name: "Gihani Anjalika",
+            message: message,
+            reply_to: email,
+        };
+
+        setLoading(true);
+        emailjs
+            .send(
+                "service_3gedtuh",
+                "template_qdxhbbj",
+                templatePrams,
+                "jwk9vhF-fqRN6iJil"
+            )
+            .then(
+                function(response){
+                    setSuccessMessage("Message sent successfully !!");
+                    setLoading(false);
+                    setEmail("");
+                    setName("");
+                    setMessage("");
+                    
+                    setTimeout(() => {
+                        setSuccessMessage("");
+                    }, 5000)
+                },
+                function(error){
+                    setErrorMessage("Error occured !!");
+                    setLoading(false);
+
+                    setTimeout(() => {
+                        setErrorMessage("");
+                    }, 5000)
+                }
+                
+            );
     };
+    
+
 
     return (
         <div className="contact-container">
@@ -45,34 +77,35 @@ const Contact = () => {
                 </div>
                 <div className="form-container">
                     <h2>Get in Touch</h2>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={sendEmail}>
                         <input
                             type="text"
                             name="name"
                             placeholder="Your Name"
-                            value={form.name}
-                            onChange={handleChange}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             required
                         />
                         <input
                             type="email"
                             name="email"
                             placeholder="Your Email"
-                            value={form.email}
-                            onChange={handleChange}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                         <textarea
                             name="message"
                             placeholder="Your Message"
-                            value={form.message}
-                            onChange={handleChange}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
                             required
                         />
-                        <button type="submit">Send Message</button>
-                    </form>
-                    {successMessage && <p className="success-message">{successMessage}</p>}
+                        <button type="submit" disabled={loading}>{loading ? "Sending..." : "Send Message"}</button>
+                        {successMessage && <p className="success-message">{successMessage}</p>}
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    </form>
+                    
                 </div>
             </div>
             <style jsx>{`
