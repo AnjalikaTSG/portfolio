@@ -136,6 +136,7 @@ const Contact = () => {
                     display: flex;
                     flex-direction: column;
                     gap: 20px;
+                    font-size: 1.8rem;
                 }
 
                 .form-container {
@@ -180,6 +181,7 @@ const Contact = () => {
                     border-radius: 4px;
                     font-size: 16px;
                     color: #333;
+                    font-family: 'Roboto', sans-serif;
                 }
 
                 .form-container button {
